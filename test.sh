@@ -99,7 +99,6 @@ assertResult () {
     lastExpected="${expected}"
 }
 
-# compare 2 files
 # assertFile resultPath expectedPath
 assertFile () {
     local resultPath="$1"
@@ -115,6 +114,17 @@ assertFile () {
     lastExpected=$(cat "${expectedPath}" 2> /dev/null)
 }
 
+# assertFileContent resultPath expectedContent
+assertFileContent () {
+    local resultPath="$1"
+    local expectedContent="$2"
+    local tmpFile=$(fixtureTmpFilePath)
+    
+    echo  -n "${expectedContent}" > "${tmpFile}"
+    cmpFile "${resultPath}" "${tmpFile}"
+    rm "${tmpFile}"
+}
+
 export -f report
 export -f suite
 export -f it
@@ -122,3 +132,4 @@ export -f itEnd
 export -f fixtureTmpFilePath
 export -f assertResult
 export -f assertFile
+export -f assertFileContent

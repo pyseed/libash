@@ -6,19 +6,27 @@ lib tools for bash scripts
 
 ### test.sh
 
-unit test tools
+lite unit test tools
+
+```
+curl https://raw.githubusercontent.com/pyseed/libash/master/test.sh > test.sh
+```
 
 all on... callbacks are optional
 
-${currentSuite}: current suite name
-${current}: current test name
+variables:
+- currentSuite: current suite name
+- current: current test name
+- lastResult: result used in last assert
+- lastExpected: expected valule from last assert
 
 fixtures functions:
 - fixtureTmpFilePath
 
 assert functions:
 - assertResult result expected (compare results)
-- assertFile /path/result /path/expected (compare file with diff)
+- assertFile /path/result ./path/expected (compare files with diff)
+- assertFileContent /path/result expectedContent
 
 ```bash
 onBeforeSuite () {
@@ -38,7 +46,7 @@ onAfterIt () {
   rm "/tmp/$1" 2> /dev/null
 }
 
-. libash/lib.sh
+. libash/test.sh
 
 mySuite () {
     suite "mysuite"
@@ -49,7 +57,7 @@ mySuite () {
 
     it test2
     ... > "/tmp/${current}"
-    cmpFile "/tmp/${current}" path/to/expected
+    cmpFile "/tmp/${current}" ./path/to/expected
 
     local tmpFile=$(fixtureTmpFilePath)
     ...
