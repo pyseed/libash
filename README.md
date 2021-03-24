@@ -52,7 +52,9 @@ onAfterIt () {
   rm "/tmp/$1" 2> /dev/null
 }
 
-. libash/test.sh
+# add test/libash_test.sh in .gitignore
+curl https://raw.githubusercontent.com/pyseed/libash/master/test.sh > libash_test.sh
+. ./libash_test.sh
 
 mySuite () {
     suite "mysuite"
