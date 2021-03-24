@@ -53,11 +53,13 @@ mySuite () {
 
     it test1
     result=$(...)
-    cmpResult "${result}" "expected"
+    assertResult "${result}" "expected"
 
     it test2
     ... > "/tmp/${current}"
-    cmpFile "/tmp/${current}" ./path/to/expected
+    assertFile "/tmp/${current}" ./path/to/expected
+    or
+    assertFileContent "/tmp/${current}" "expected"
 
     local tmpFile=$(fixtureTmpFilePath)
     ...
