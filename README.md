@@ -53,7 +53,7 @@ onAfterIt () {
 }
 
 # add test/libash_test.sh in .gitignore
-curl https://raw.githubusercontent.com/pyseed/libash/master/test.sh > libash_test.sh
+wget -O libash_test.sh https://raw.githubusercontent.com/pyseed/libash/master/test.sh
 . ./libash_test.sh
 
 mySuite () {
