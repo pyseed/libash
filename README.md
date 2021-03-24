@@ -24,11 +24,16 @@ fixtures functions:
 - fixtureTmpFilePath
 
 assert functions:
+- assertIs value
+- assertEmpty value
+- assertIsFile filePath
 - assertResult result expected (compare results)
 - assertFile /path/result ./path/expected (compare files with diff)
 - assertFileContent /path/result expectedContent
 
 ```bash
+#verbose=true
+
 onBeforeSuite () {
   # suite name in $1
 }
@@ -51,6 +56,10 @@ onAfterIt () {
 mySuite () {
     suite "mysuite"
 
+    local tmpFile=$(fixtureTmpFilePath)
+    ...
+    rm "${tmpFile}"
+
     it test1
     result=$(...)
     assertResult "${result}" "expected"
@@ -61,9 +70,7 @@ mySuite () {
     or
     assertFileContent "/tmp/${current}" "expected"
 
-    local tmpFile=$(fixtureTmpFilePath)
     ...
-    rm "${tmpFile}"
 }
 
 mySuite

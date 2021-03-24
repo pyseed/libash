@@ -99,6 +99,21 @@ assertResult () {
     lastExpected="${expected}"
 }
 
+# assertIs value
+assertIs () {   
+    [ -n "$1" ] && _logSuccess || _logFail
+}
+
+# assertIsEmpty value
+assertIsEmpty () {   
+    [ -z "$1" ] && _logSuccess || _logFail
+}
+
+# assertIsFile filePath
+assertIsFile () {
+    [ -f "$1" ] && _logSuccess || _logFail
+}
+
 # assertFile resultPath expectedPath
 assertFile () {
     local resultPath="$1"
@@ -119,7 +134,7 @@ assertFileContent () {
     local resultPath="$1"
     local expectedContent="$2"
     local tmpFile=$(fixtureTmpFilePath)
-    
+
     echo  -n "${expectedContent}" > "${tmpFile}"
     cmpFile "${resultPath}" "${tmpFile}"
     rm "${tmpFile}"
@@ -131,5 +146,8 @@ export -f it
 export -f itEnd
 export -f fixtureTmpFilePath
 export -f assertResult
+export -f assertIs
+export -f assertIsEmpty
+export -f assertIsFile
 export -f assertFile
 export -f assertFileContent
