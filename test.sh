@@ -144,11 +144,10 @@ assertFileContent () {
     local expectedContent="$2"
     local tmpFile=$(fixtureTmpFilePath)
 
-    echo  -n "${expectedContent}" > "${tmpFile}"
+    echo -n "${expectedContent}" > "${tmpFile}"
     assertFile "${resultPath}" "${tmpFile}"
     rm "${tmpFile}"
 }
-
 
 export -f report
 export -f suite
