@@ -5,38 +5,6 @@
 # unit test tools
 #
 
-# HOW TO
-# onBeforeSuite () {
-#   echo "suite $1"
-# }
-#
-# onAfterSuite () {
-#   echo "suite $1"
-# }
-#
-# onBeforeIt () {
-#     echo "test $1"
-# }
-#
-# onAfterIt () {
-#     echo "test $1"
-# }
-#
-# . libash/lib.sh
-#
-# suite "mysuite"
-#
-# it mytest
-# result=
-# cmpResult "${result}" "expected"
-#
-# it mytest2
-# cmpFile /path/to/result path/to/expected
-#
-# report
-#
-# END HOW TO
-
 currentSuite=""
 current=""
 totalCount=0
@@ -44,6 +12,18 @@ successCount=0
 failCount=0
 lastResult=""
 lastExpected=""
+
+# log a success
+_logSuccess () {
+    echo -e "\e[32mOK\e[0m ${currentSuite}.${current}"
+    ((successCount=successCount+1))
+}
+
+# log a fail
+_logFail () {
+    echo -e "\e[31mKO\e[0m ${currentSuite}.${current}"
+    ((failCount=failCount+1))
+}
 
 # report
 report () {
@@ -102,58 +82,43 @@ itEnd () {
     lastExpected=""
 }
 
-# log a success
-logSuccess () {
-    echo -e "\e[32mOK\e[0m ${currentSuite}.${current}"
-    ((successCount=successCount+1))
-}
-
-# log a fail
-logFail () {
-    echo -e "\e[31mKO\e[0m ${currentSuite}.${current}"
-    ((failCount=failCount+1))
-}
-
 # get temporary file
-getTmpFilePath () {
+fixtureTmpFilePath () {
     local ts=$(date +"%T")
-    echo "/tmp/test_${ts}.tmp"
+    echo "/tmp/libash_test_${ts}.tmp"
 }
 
-# compare 2 files
-# cmpFile result expected
-cmpFile () {
+# assertResult result expected
+assertResult () {
     local result="$1"
     local expected="$2"
 
-    if diff -u "${result}" "${expected}"; then
-        logSuccess
-    else
-        logFail
-    fi
-
-    lastResult=$(cat "${result}" 2> /dev/null)
-    lastExpected=$(cat "${expected}" 2> /dev/null)
-}
-
-# compare result
-# cmpResult result expected
-cmpResult () {
-    local result="$1"
-    local expected="$2"
-
-    [ "${result}" = "${expected}" ] && logSuccess || logFail
+    [ "${result}" = "${expected}" ] && _logSuccess || _logFail
 
     lastResult="${result}"
     lastExpected="${expected}"
+}
+
+# compare 2 files
+# assertFile resultPath expectedPath
+assertFile () {
+    local resultPath="$1"
+    local expectedPath="$2"
+
+    if diff -u "${resultPath}" "${expectedPath}"; then
+        _logSuccess
+    else
+        _logFail
+    fi
+
+    lastResult=$(cat "${resultPath}" 2> /dev/null)
+    lastExpected=$(cat "${expectedPath}" 2> /dev/null)
 }
 
 export -f report
 export -f suite
 export -f it
 export -f itEnd
-export -f logSuccess
-export -f logFail
-export -f getTmpFilePath
-export -f cmpFile
-export -f cmpResult
+export -f fixtureTmpFilePath
+export -f assertResult
+export -f assertFile
