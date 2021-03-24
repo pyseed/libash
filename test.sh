@@ -84,9 +84,16 @@ itEnd () {
 }
 
 
+# get timestamp
+fixtureTimestamp () {
+    local ts=$(date +%Y-%m-%d_%H-%M-%S)
+    echo "${ts}"
+}
+
+
 # get temporary file
 fixtureTmpFilePath () {
-    local ts=$(date +"%T")
+    local ts=$(fixtureTimestamp)
     echo "/tmp/libash_test_${ts}.tmp"
 }
 
@@ -153,7 +160,10 @@ export -f report
 export -f suite
 export -f it
 export -f itEnd
+
+export -f fixtureTimestamp
 export -f fixtureTmpFilePath
+
 export -f assertIs
 export -f assertIsEmpty
 export -f assertIsFile
