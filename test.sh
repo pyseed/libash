@@ -145,7 +145,7 @@ assertFileContent () {
     local tmpFile=$(fixtureTmpFilePath)
 
     echo  -n "${expectedContent}" > "${tmpFile}"
-    cmpFile "${resultPath}" "${tmpFile}"
+    assertFile "${resultPath}" "${tmpFile}"
     rm "${tmpFile}"
 }
 
