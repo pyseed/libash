@@ -27,6 +27,7 @@ assert functions:
 - assertIs value
 - assertEmpty value
 - assertIsFile filePath
+- assertIsNotFile filePath
 - assertResult result expected (compare results)
 - assertFile /path/result ./path/expected (compare files with diff)
 - assertFileContent /path/result expectedContent

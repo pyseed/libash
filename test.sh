@@ -25,6 +25,7 @@ _logFail () {
     ((failCount=failCount+1))
 }
 
+
 # report
 report () {
     echo ""
@@ -82,22 +83,13 @@ itEnd () {
     lastExpected=""
 }
 
+
 # get temporary file
 fixtureTmpFilePath () {
     local ts=$(date +"%T")
     echo "/tmp/libash_test_${ts}.tmp"
 }
 
-# assertResult result expected
-assertResult () {
-    local result="$1"
-    local expected="$2"
-
-    [ "${result}" = "${expected}" ] && _logSuccess || _logFail
-
-    lastResult="${result}"
-    lastExpected="${expected}"
-}
 
 # assertIs value
 assertIs () {   
@@ -112,6 +104,23 @@ assertIsEmpty () {
 # assertIsFile filePath
 assertIsFile () {
     [ -f "$1" ] && _logSuccess || _logFail
+}
+
+# assertIsFile filePath
+assertIsNotFile () {
+    [ ! -f "$1" ] && _logSuccess || _logFail
+}
+
+
+# assertResult result expected
+assertResult () {
+    local result="$1"
+    local expected="$2"
+
+    [ "${result}" = "${expected}" ] && _logSuccess || _logFail
+
+    lastResult="${result}"
+    lastExpected="${expected}"
 }
 
 # assertFile resultPath expectedPath
@@ -140,14 +149,16 @@ assertFileContent () {
     rm "${tmpFile}"
 }
 
+
 export -f report
 export -f suite
 export -f it
 export -f itEnd
 export -f fixtureTmpFilePath
-export -f assertResult
 export -f assertIs
 export -f assertIsEmpty
 export -f assertIsFile
+export -f assertIsNotFile
+export -f assertResult
 export -f assertFile
 export -f assertFileContent
