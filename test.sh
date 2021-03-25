@@ -28,6 +28,9 @@ _logFail () {
 
 # report
 report () {
+    # end latest suite
+    suiteEnd
+
     echo ""
     echo "--"
 
