@@ -21,9 +21,9 @@ variables:
 - lastExpected: expected valule from last assert
 
 fixtures functions:
-- fixtureHumanTimestamp
-- fixtureTimestamp
-- fixtureTmpFilePath
+- fixtureHumanTimestamp (second only precision, not suitable for temporary file names)
+- fixtureTimestamp (unique)
+- fixtureTmpFilePath (use fixtureTimestamp)
 
 assert functions:
 - assertIs value
