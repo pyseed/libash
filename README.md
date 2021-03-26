@@ -21,6 +21,7 @@ variables:
 - lastExpected: expected valule from last assert
 
 fixtures functions:
+- fixtureHumanTimestamp
 - fixtureTimestamp
 - fixtureTmpFilePath
 

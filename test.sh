@@ -88,11 +88,14 @@ itEnd () {
 
 
 # get timestamp
-fixtureTimestamp () {
+fixtureHumanTimestamp () {
     local ts=$(date +%Y-%m-%d_%H-%M-%S)
     echo "${ts}"
 }
-
+fixtureTimestamp () {
+    local ts=$(date +%s%N)
+    echo "${ts}"
+}
 
 # get temporary file
 fixtureTmpFilePath () {
@@ -164,6 +167,7 @@ export -f suite
 export -f it
 export -f itEnd
 
+export -f fixtureHumanTimestamp
 export -f fixtureTimestamp
 export -f fixtureTmpFilePath
 
