@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# LIBASH - test.sh
+# LIBASH - io.sh
 # unit test tools
 #
 

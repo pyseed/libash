@@ -82,6 +82,16 @@ mySuite
 report # that will display results
 ```
 
+### core.sh
+
+core helpers
+
+```
+wget -O libash_core.sh https://raw.githubusercontent.com/pyseed/libash/master/core.sh
+```
+
+- checkArg name var (check function arg, name is display as info to identify arg) (will exit if arg is missing)
+
 ### io.sh
 
 io helpers
