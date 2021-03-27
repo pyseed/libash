@@ -81,3 +81,14 @@ mySuite () {
 mySuite
 report # that will display results
 ```
+
+### io.sh
+
+- pause (will not be applyied if NONINTERACTIVE=true)
+- error ...args
+- fatal ...args
+- warning ...args
+- success ...args
+- humanTimestamp (second precision, do not use for unique temporay file)
+- timestamp (unique, use for temporay file)
+- tmpFilePath (get a unique temporary file name)

@@ -42,6 +42,7 @@ report () {
 
     echo ""
 }
+export -f report
 
 # suite
 # suite name
@@ -54,6 +55,7 @@ suite () {
     currentSuite="$*"
     declare -F onBeforeSuite &> /dev/null && onBeforeSuite "${currentSuite}"
 }
+export -f suite
 
 suiteEnd () {
     # end previous test
@@ -61,6 +63,7 @@ suiteEnd () {
 
     [ -n "${currentSuite}" ] && declare -F onAfterSuite &> /dev/null && onAfterSuite "${currentSuite}"
 }
+export -f suiteEnd
 
 # a test is beginning
 # will set current test name in "${current}"
@@ -74,6 +77,7 @@ it () {
     ((totalCount=totalCount+1))
     echo ""
 }
+export -f it
 
 # a test has finished
 # endTest
@@ -85,44 +89,51 @@ itEnd () {
     lastResult=""
     lastExpected=""
 }
-
+export -f itEnd
 
 # get timestamp
 fixtureHumanTimestamp () {
     local ts=$(date +%Y-%m-%d_%H-%M-%S)
     echo "${ts}"
 }
+export -f fixtureHumanTimestamp
 fixtureTimestamp () {
     local ts=$(date +%s%N)
     echo "${ts}"
 }
+export -f fixtureTimestamp
 
 # get temporary file
 fixtureTmpFilePath () {
     local ts=$(fixtureTimestamp)
     echo "/tmp/libash_test_${ts}.tmp"
 }
+export -f fixtureTmpFilePath
 
 
 # assertIs value
 assertIs () {   
     [ -n "$1" ] && _logSuccess || _logFail
 }
+export -f assertIs
 
 # assertIsEmpty value
 assertIsEmpty () {   
     [ -z "$1" ] && _logSuccess || _logFail
 }
+export -f assertIsEmpty
 
 # assertIsFile filePath
 assertIsFile () {
     [ -f "$1" ] && _logSuccess || _logFail
 }
+export -f assertIsFile
 
 # assertIsFile filePath
 assertIsNotFile () {
     [ ! -f "$1" ] && _logSuccess || _logFail
 }
+export -f assertIsNotFile
 
 
 # assertResult result expected
@@ -135,6 +146,7 @@ assertResult () {
     lastResult="${result}"
     lastExpected="${expected}"
 }
+export -f assertResult
 
 # assertFile resultPath expectedPath
 assertFile () {
@@ -150,6 +162,7 @@ assertFile () {
     lastResult=$(cat "${resultPath}" 2> /dev/null)
     lastExpected=$(cat "${expectedPath}" 2> /dev/null)
 }
+export -f assertFile
 
 # assertFileContent resultPath expectedContent
 assertFileContent () {
@@ -161,20 +174,4 @@ assertFileContent () {
     assertFile "${resultPath}" "${tmpFile}"
     rm "${tmpFile}"
 }
-
-export -f report
-export -f suite
-export -f it
-export -f itEnd
-
-export -f fixtureHumanTimestamp
-export -f fixtureTimestamp
-export -f fixtureTmpFilePath
-
-export -f assertIs
-export -f assertIsEmpty
-export -f assertIsFile
-export -f assertIsNotFile
-export -f assertResult
-export -f assertFile
 export -f assertFileContent
