@@ -9,7 +9,7 @@ lib tools for bash scripts
 lite unit test tools
 
 ```
-curl https://raw.githubusercontent.com/pyseed/libash/master/test.sh > test.sh
+wget -O libash_test.sh https://raw.githubusercontent.com/pyseed/libash/master/test.sh
 ```
 
 all on... callbacks are optional
@@ -83,6 +83,12 @@ report # that will display results
 ```
 
 ### io.sh
+
+io helpers
+
+```
+wget -O libash_io.sh https://raw.githubusercontent.com/pyseed/libash/master/io.sh
+```
 
 - pause (will not be applyied if NONINTERACTIVE=true)
 - error ...args
