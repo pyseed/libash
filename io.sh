@@ -22,7 +22,7 @@ export -f error
 # display fatal error in red then exit
 # fatal ...args
 fatal () {
-    echo -e "\e[31mERROR\e[0m $*"
+    echo -e "\e[FATAL\e[0m $*"
     echo "aborted"
     exit 1
 }
@@ -31,7 +31,7 @@ export -f fatal
 # display warning in orange
 # warning ...args
 warning () {
-    echo -e "\e[33mERROR\e[0m $*"
+    echo -e "\e[WARNING\e[0m $*"
 }
 export -f warning
 
