@@ -54,3 +54,15 @@ tmpFilePath () {
     local ts=$(timestamp)
     echo "/tmp/libash_test_${ts}.tmp"
 }
+
+# sync directories
+# syncDir src target
+# requires rsync
+syncDir () {
+   local src="$1"
+   local target="$2"
+
+   echo "sync in progress... ${src} -> ${target}"
+   mkdir -p "${target}"
+   rsync "${src}/" "${target}/" --delete -avzP
+}
