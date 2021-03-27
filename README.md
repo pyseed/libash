@@ -108,3 +108,4 @@ wget -O libash_io.sh https://raw.githubusercontent.com/pyseed/libash/master/io.s
 - humanTimestamp (second precision, do not use for unique temporay file)
 - timestamp (unique, use for temporay file)
 - tmpFilePath (get a unique temporary file name)
+- syncDir src target (requires rsync) (src and target without trailing /)

@@ -57,6 +57,7 @@ tmpFilePath () {
 
 # sync directories
 # syncDir src target
+# src and target without trailing /
 # requires rsync
 syncDir () {
    local src="$1"
