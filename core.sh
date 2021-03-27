@@ -13,4 +13,3 @@ checkArg () {
       exit 1
    fi
 }
-export -f checkArg
