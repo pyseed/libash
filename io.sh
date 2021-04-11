@@ -8,7 +8,7 @@
 # mark a pause
 # pause will not be applyied if NONINTERACTIVE=true
 pause () {
-    [ "${NONINTERACTIVE}" != 'false' ] && read -p "[PAUSE] CTRL-C TO CANCEL or press a key to CONTINUE"
+    [ "${NONINTERACTIVE}" != 'true' ] && read -p "[PAUSE] CTRL-C TO CANCEL or press a key to CONTINUE" || true
 }
 
 # display error in red
