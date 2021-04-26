@@ -2,6 +2,8 @@
 
 lib tools for bash scripts
 
+LICENSE: MIT
+
 ## modules
 
 ### test.sh
@@ -11,6 +13,8 @@ lite unit test tools
 ```
 wget -O libash_test.sh https://raw.githubusercontent.com/pyseed/libash/master/test.sh
 ```
+
+or via bashget https://github.com/pyseed/bashget: `bashget add libash pyseed`, you can source with `. $(bashget get libash)/test.sh`
 
 all on... callbacks are optional
 
@@ -90,6 +94,8 @@ core helpers
 wget -O libash_core.sh https://raw.githubusercontent.com/pyseed/libash/master/core.sh
 ```
 
+or via bashget https://github.com/pyseed/bashget: `bashget add libash pyseed`, you can source with `. $(bashget get libash)/core.sh`
+
 - checkArg name var (check function arg, name is display as info to identify arg) (will exit if arg is missing)
 
 ### io.sh
@@ -99,6 +105,8 @@ io helpers
 ```
 wget -O libash_io.sh https://raw.githubusercontent.com/pyseed/libash/master/io.sh
 ```
+
+or via bashget https://github.com/pyseed/bashget: `bashget add libash pyseed`, you can source with `. $(bashget get libash)/io.sh`
 
 - pause (will not be applyied if NONINTERACTIVE=true)
 - error ...args

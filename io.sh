@@ -25,23 +25,32 @@ _colors=(
     [reset]="$(echo -e '\e[0m')"
 )
 
+declare -g _logPrefix=""
+
+logSetPrefix() {
+    _logPrefix="$*"
+}
+
+log () {
+    echo "${_logPrefix}${*}"
+}
 
 # mark a pause
 # pause will not be applyied if NONINTERACTIVE=true
 pause () {
-    [ "${NONINTERACTIVE}" != 'true' ] && read -p "[PAUSE] CTRL-C TO CANCEL or press a key to CONTINUE" || true
+    [ "${NONINTERACTIVE}" != 'true' ] && read -p "${_logPrefix}[PAUSE] CTRL-C TO CANCEL or press a key to CONTINUE" || true
 }
 
 # display error in red
 # error ...args
 error () {
-    echo "${_colors[red]}[ERROR] ${*}${__colors[reset]}"
+    echo "${_colors[red]}${_logPrefix}[ERROR] ${*}${__colors[reset]}"
 }
 
 # display fatal error in red then exit
 # fatal ...args
 fatal () {
-    echo "${_colors[red]}[FATAL] ${*}${__colors[reset]}"
+    echo "${_colors[red]}${_logPrefix}[FATAL] ${*}${__colors[reset]}"
     echo "aborted"
     exit 1
 }
@@ -49,13 +58,13 @@ fatal () {
 # display warning in orange
 # warning ...args
 warning () {
-    echo "${_colors[yellow]}[WARNING] ${*}${__colors[reset]}"
+    echo "${_colors[yellow]}${_logPrefix}[WARNING] ${*}${__colors[reset]}"
 }
 
 # highlight success in green
 # success ...args
 success () {
-    echo "${_colors[green]}[SUCCESS] ${*}${__colors[reset]}"
+    echo "${_colors[green]}${_logPrefix}[SUCCESS] ${*}${__colors[reset]}"
 }
 
 # get timestamp (second precision)
